@@ -2,7 +2,7 @@
 
 This is a simple payment processing application demonstrating a secure payment flow with signature verification and status handling.
 
-![Payment Flow Demo]](docs/paymentDemo.gif)
+![Payment Flow Demo](docs/paymentDemo.gif)
 
 ## How to run
 
@@ -10,7 +10,7 @@ This is a simple payment processing application demonstrating a secure payment f
 2. Run the Spring Boot application.
 3. Open the main page (/request) and test the payment flow.
 
-## Technologies Used
+## Used technologies 
 
 - Java 21
 - Spring Boot
