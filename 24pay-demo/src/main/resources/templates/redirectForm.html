@@ -1,15 +1,18 @@
-<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Presmerovanie na platobnú bránu</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-<h1>Presmerovanie na platobnú bránu...</h1>
-<form th:action="${paymentUrl}" method="post" id="paymentForm">
-    <div th:each="entry : ${params.entrySet()}">
-        <input type="hidden" th:name="${entry.key}" th:value="${entry.value}" />
-    </div>
-</form>
+<div>
+    <h2>Presmerovanie na platobnú bránu...</h2>
+    <form th:action="${paymentUrl}" method="post" id="paymentForm">
+        <div th:each="entry : ${params.entrySet()}">
+            <input type="hidden" th:name="${entry.key}" th:value="${entry.value}" />
+        </div>
+    </form>
+</div>
 <script>
     document.getElementById('paymentForm').submit();
 </script>

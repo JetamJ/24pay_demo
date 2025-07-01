@@ -3,27 +3,35 @@
 <head>
     <title>Výsledok platby</title>
     <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-<h2>Výsledok platby</h2>
+<div class="result-box">
+    <img th:src="@{/24-pay-logo-white-bg.png}" alt="Logo" />
+    <h2>Výsledok platby</h2>
 
-<div th:if="${!validSignature}">
-    <p style="color:red;">❌ Neplatný podpis. Dáta môžu byť sfalšované.</p>
+    <div th:if="${!validSignature}">
+        <p class="error">❌ Neplatný podpis. Dáta môžu byť sfalšované.</p>
+    </div>
+
+    <div th:if="${validSignature}">
+        <p th:if="${result == 'OK'}" class="success">
+            ✅ Platba bola úspešná.
+        </p>
+
+        <p th:if="${result == 'FAIL'}" class="error">
+            ❌ Platba bola neúspešná.
+        </p>
+
+        <p th:if="${result == 'PENDING'}" class="pending">
+            ⏳ Platba je v spracovaní.
+        </p>
+
+        <ul>
+            <li><strong>Transakcia:</strong> <span th:text="${transactionId}"/></li>
+            <li><strong>Suma:</strong> <span th:text="${amount}"/> <span th:text="${currency}"/></li>
+        </ul>
+    </div>
 </div>
-
-<div th:if="${validSignature}">
-    <p th:if="${result == 'OK'}" style="color:green;">
-        ✅ Platba bola úspešná.
-    </p>
-    <p th:if="${result != 'OK'}" style="color:red;">
-        ❌ Platba zlyhala. Výsledok: <span th:text="${result}"/>
-    </p>
-
-    <ul>
-        <li><strong>Transakcia:</strong> <span th:text="${transactionId}"/></li>
-        <li><strong>Suma:</strong> <span th:text="${amount}"/> <span th:text="${currency}"/></li>
-    </ul>
-</div>
-
 </body>
 </html>

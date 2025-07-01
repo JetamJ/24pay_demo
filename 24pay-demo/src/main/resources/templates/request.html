@@ -2,13 +2,52 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Inicializácia platby</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-<h1>Inicializácia platby</h1>
-<form th:action="@{/request}" method="post">
-    <label for="amount">Výška platby:</label>
-    <input type="text" id="amount" name="amount" required />
-    <button type="submit">Zaplať</button>
-</form>
+<div class="container">
+    <img th:src="@{/24-pay-logo-white-bg.png}" alt="Logo" />
+    <h2>Platba</h2>
+    <form th:action="@{/request}" method="post" onsubmit="formatAmount()">
+        <label for="amount">Výška platby:</label><br>
+        <input type="text" id="amount" name="amount" required oninput="filterInput(event)" onblur="formatAmount()" />
+        <button type="submit">Zaplatiť</button>
+    </form>
+</div>
+
+<script>
+    function filterInput(event) {
+        const input = event.target;
+        let value = input.value.replace(",", "."); // unify to "."
+
+        value = value.replace(/[^0-9.]/g, '');
+
+        const parts = value.split('.');
+        if (parts.length > 2) {
+            value = parts[0] + '.' + parts.slice(1).join('').substring(0, 2);
+        }
+
+        input.value = value;
+    }
+
+    function formatAmount() {
+        const input = document.getElementById('amount');
+        let value = input.value.replace(",", ".").trim();
+
+        if (!value) return;
+
+        if (!value.includes('.')) {
+            value += '.00';
+        } else {
+            const parts = value.split('.');
+            if (parts[1].length === 1) value += '0';
+            else if (parts[1].length === 0) value += '00';
+            else if (parts[1].length > 2) value = parts[0] + '.' + parts[1].substring(0, 2);
+        }
+
+        input.value = value;
+    }
+</script>
 </body>
 </html>
