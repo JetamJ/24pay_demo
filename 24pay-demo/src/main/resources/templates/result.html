@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Výsledok platby</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+<h2>Výsledok platby</h2>
+
+<div th:if="${!validSignature}">
+    <p style="color:red;">❌ Neplatný podpis. Dáta môžu byť sfalšované.</p>
+</div>
+
+<div th:if="${validSignature}">
+    <p th:if="${result == 'OK'}" style="color:green;">
+        ✅ Platba bola úspešná.
+    </p>
+    <p th:if="${result != 'OK'}" style="color:red;">
+        ❌ Platba zlyhala. Výsledok: <span th:text="${result}"/>
+    </p>
+
+    <ul>
+        <li><strong>Transakcia:</strong> <span th:text="${transactionId}"/></li>
+        <li><strong>Suma:</strong> <span th:text="${amount}"/> <span th:text="${currency}"/></li>
+    </ul>
+</div>
+
+</body>
+</html>

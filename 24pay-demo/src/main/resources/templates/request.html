@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Inicializácia platby</title>
+</head>
+<body>
+<h1>Inicializácia platby</h1>
+<form th:action="@{/request}" method="post">
+    <label for="amount">Výška platby:</label>
+    <input type="text" id="amount" name="amount" required />
+    <button type="submit">Zaplať</button>
+</form>
+</body>
+</html>
